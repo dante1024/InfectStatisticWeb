@@ -23,6 +23,8 @@ public class Entry {
 		initMap();
 		String[] fileList = getAllFile(path);
 		solveTheFile(fileList);
+		Province nationWide = Entry.map.get("È«¹ú");
+		System.out.println(nationWide.getDateMap().get("2020-01-21").getIp());
 //		System.out.println("Yes");
 	}
 	
