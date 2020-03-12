@@ -19,7 +19,6 @@ public class Interface {
 				"2020-02-01", "2020-02-02"
 		};
 		Province nationWide = Entry.map.get("È«¹ú");
-		Map<String, Date> dateMap = nationWide.getDateMap();
 		
 		for(String dateString : dateList) {
 			Date anyDate = dateMap.get(dateString);
@@ -42,7 +41,6 @@ public class Interface {
 				"2020-02-01", "2020-02-02"
 		};
 		Province anyProvince = Entry.map.get("provinceName");
-		Map<String, Date> dateMap = anyProvince.getDateMap();
 		
 		for(String dateString : dateList) {
 			Date anyDate = dateMap.get(dateString);
