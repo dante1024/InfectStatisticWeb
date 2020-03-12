@@ -45,6 +45,7 @@ public class Entry {
 			String fileDate = aFile.substring(0, aFile.indexOf("."));
 			
 			Date nationwideDate = new Date();
+			nationwideDate.setDate(fileDate);
 			
 			try {
 	    		File file = new File(path + "\\" + aFile);
@@ -66,7 +67,7 @@ public class Entry {
 	    			if(map.get(provinceName) != null) {
 	    				Province province = map.get(provinceName);
 	    				Map<String, Date> dateMap = province.getDateMap();
-	    				Date date;
+	    				Date date = new Date();
 	    				
 	    				if(dateMap.get(fileDate) != null) {
 	    					date = province.getDateMap().get(fileDate);
