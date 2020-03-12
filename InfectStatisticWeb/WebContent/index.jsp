@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
+<%@page import="backend.Entry" %>
+<%@page import="backend.Interface" %>
+    
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -16,14 +19,62 @@
 
 <div id="container" style="height: 800px;width:1200px;background:white;margin:20px 0 0;"></div>
 
+<%
+	String path = "C:\\Users\\lenovo\\Desktop\\部分疫情日志log";
+	Entry entry=new Entry();
+	Entry.initMap();
+	String[] fileList = Entry.getAllFile(path);
+	Entry.solveTheFile(fileList);
+	
+	//int[] a=nationwide();
+//	int[] a=Interface.anyProvince("福建");
+//	int[] a=Interface.nationwideForDate("2020-01-20");
+	// int[] a=Interface.anyProvinceForDate("2020-01-19","湖北");
+%>
+
+
 <script type="text/javascript">
     // 全国省份列表
     
-      var a=66;
+    var beijing=<%=Interface.anyProvince("北京")[0]%>;
+    var tianjin=<%=Interface.anyProvince("天津")[0]%>;
+    var shanghai=<%=Interface.anyProvince("上海")[0]%>;
+    var chongqing=<%=Interface.anyProvince("重庆")[0]%>;
+    var hebei=<%=Interface.anyProvince("河北")[0]%>;
+    var henan=<%=Interface.anyProvince("河南")[0]%>;
+    var yunnan=<%=Interface.anyProvince("云南")[0]%>;
+    var liaoning=<%=Interface.anyProvince("辽宁")[0]%>;
+    var heilongjiang=<%=Interface.anyProvince("黑龙江")[0]%>;
+    var hunan=<%=Interface.anyProvince("湖南")[0]%>;
+    var anhui=<%=Interface.anyProvince("安徽")[0]%>;
+    var shandong=<%=Interface.anyProvince("山东")[0]%>;
+    var xinjiang=<%=Interface.anyProvince("新疆")[0]%>;
+    var jiangsu=<%=Interface.anyProvince("江苏")[0]%>;
+    var zhejiang=<%=Interface.anyProvince("浙江")[0]%>;
+    var jiangxi=<%=Interface.anyProvince("江西")[0]%>;
+    var hubei=<%=Interface.anyProvince("湖北")[0]%>;
+    var guangxi=<%=Interface.anyProvince("广西")[0]%>;
+    var gansu=<%=Interface.anyProvince("甘肃")[0]%>;
+    var shanxi=<%=Interface.anyProvince("山西")[0]%>;
+    var neimenggu=<%=Interface.anyProvince("内蒙古")[0]%>;
+    var shanxi2=<%=Interface.anyProvince("陕西")[0]%>;
+    var jilin=<%=Interface.anyProvince("吉林")[0]%>;
+    var fujian=<%=Interface.anyProvince("福建")[0]%>;
+    var guizhou=<%=Interface.anyProvince("贵州")[0]%>;
+    var guangdong=<%=Interface.anyProvince("广东")[0]%>;
+    var qinghai=<%=Interface.anyProvince("青海")[0]%>;
+    var xizang=<%=Interface.anyProvince("西藏")[0]%>;
+    var sichuan=<%=Interface.anyProvince("四川")[0]%>;
+    var ningxia=<%=Interface.anyProvince("宁夏")[0]%>;
+    var hainan=<%=Interface.anyProvince("海南")[0]%>;
     
-    var dataMap = [{id:1, name: '北京',value:a }, { name: '天津',value:a }, { name: '上海' }, { name: '重庆' }, { name: '河北' }, { name: '河南' }, { name: '云南' }, { name: '辽宁' }, { name: '黑龙江' }, { name: '湖南' }, { name: '安徽' }, { name: '山东' },
-    { name: '新疆' }, { name: '江苏' }, { name: '浙江' }, { name: '江西' }, { name: '湖北' }, { name: '广西' }, { name: '甘肃' }, { name: '山西' }, { name: '内蒙古' }, { name: '陕西' }, { name: '吉林' }, { name: '福建' }, { name: '贵州' },
-    { name: '广东' }, { name: '青海' }, { name: '西藏' }, { name: '四川' }, { name: '宁夏' }, { name: '海南' }, { name: '台湾' }, { name: '香港' }, { name: '澳门' }]
+    var dataMap = [{id:1, name: '北京',value:beijing }, { name: '天津',value:tianjin}, { name: '上海',value:shanghai }, { name: '重庆',value:chongqing }, 
+    	{ name: '河北',value:hebei }, { name: '河南',value:henan }, { name: '云南',value:yunnan }, { name: '辽宁',value:liaoning }, { name: '黑龙江',value:heilongjiang }, 
+    	{ name: '湖南',value:hunan }, { name: '安徽',value:anhui }, { name: '山东',value:shandong }, { name: '新疆',value:xinjiang }, { name: '江苏',value:jiangsu }, 
+    	{ name: '浙江',value:zhejiang }, { name: '江西',value:jiangxi }, { name: '湖北',value:hubei }, { name: '广西',value:guangxi }, { name: '甘肃',value:gansu }, 
+    	{ name: '山西',value:shanxi }, { name: '内蒙古',value:neimenggu },  { name: '陕西',value:shanxi2 }, { name: '吉林',value:jilin }, { name: '福建',value:fujian }, 
+    	{ name: '贵州',value:guizhou }, { name: '广东',value:guangdong }, { name: '青海',value:qinghai }, { name: '西藏',value:xizang }, { name: '四川',value:sichuan }, 
+    	{ name: '宁夏',value:ningxia }, { name: '海南',value:hainan }, { name: '台湾',value:"none" }, { name: '香港',value:"none"}, { name: '澳门',value:"none" }]
     // 需要在页面上直接标记出来的城市
     var specialMap = ['浙江', '云南', '陕西'];
     // 对dataMap进行处理，使其可以直接在页面上展示
@@ -94,19 +145,8 @@
     //使用制定的配置项和数据显示图表
     myChart.setOption(option);
     myChart.on('click', function (params) {
-        //console.log(params.id);
-        if (params.id==1)
-       	{
-        	
-        	console.log("点击的是北京");
-            //window.location.href="1.jsp?id=1";
-
-       	}
-        else
-       	{
-        	console.log("不是北京");
-        	//window.location.href="1.jsp?id=2";	
-       	}
+        console.log(params.data.id);
+        window.location.href="1.jsp?id="+params.data.name;	
         
     });
     
