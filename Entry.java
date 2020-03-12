@@ -25,16 +25,20 @@ public class Entry {
 			
 			try {
 	    		File file = new File(path + "\\" + aFile);
-	    		InputStreamReader inputReader = new InputStreamReader(new FileInputStream(file), "UTF-8");
+	    		InputStreamReader inputReader = new InputStreamReader(new FileInputStream(file), "GB2312");
 	    		BufferedReader bf = new BufferedReader(inputReader);
 	    		String str;
 	    		
 	    		while ((str = bf.readLine()) != null && str.indexOf("//") != 0) {
-	    			//System.out.println(str);
+	    			
+	    			if(str.length() == 0)
+	    				continue;
+	    			System.out.println(str);
 	    			String[] information = str.split("\\s+");
 	    			//System.out.println(information[0]);
 	    			String province = information[0];//先取到省份
 	    			int number = getNumber(information);//取出各行人数
+	    			//System.out.println(number);
 	    			
 	    			
 	    		}			
