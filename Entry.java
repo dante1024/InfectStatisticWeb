@@ -39,9 +39,20 @@ public class Entry {
 	 * 处理每一个文件
 	 */
 	private static void solveTheFile(String[] fileList) {
+		Province nationwide = map.get("全国");
 		// TODO Auto-generated method stub
 		for(String aFile : fileList) {
 			String fileDate = aFile.substring(0, aFile.indexOf("."));
+			
+			//初始化"全国"
+			Date nationwideDate;
+			if(nationwide.getDateMap().get(fileDate) != null) {
+				nationwideDate = nationwide.getDateMap().get(fileDate);
+			}
+			else {
+				nationwideDate = new Date();
+				nationwideDate.setDate(fileDate);
+			}
 			
 			try {
 	    		File file = new File(path + "\\" + aFile);
@@ -90,13 +101,19 @@ public class Entry {
 							break;
 						case "治愈":
 							int cure = date.getCure();
+							int ip1 = date.getIp();
 							cure += number;
+							ip1 -= number;
 							date.setCure(cure);
+							date.setIp(ip1);
 							break;
 						case "死亡":
 							int dead = date.getDead();
+							int ip2 = date.getIp();
 							dead += number;
+							ip2 -= number;
 							date.setDead(dead);
+							date.setIp(ip2);
 							break;
 						default:
 							break;
