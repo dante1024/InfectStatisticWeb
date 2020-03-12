@@ -93,8 +93,11 @@ public class Entry {
 							cure += number;
 							date.setCure(cure);
 							break;
-						
-							
+						case "ËÀÍö":
+							int dead = date.getDead();
+							dead += number;
+							date.setDead(dead);
+							break;
 						default:
 							break;
 						}
