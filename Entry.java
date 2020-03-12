@@ -9,6 +9,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Vector;
 
+import edu.fzu.InfectStatisticWeb.pojo.Date;
 import edu.fzu.InfectStatisticWeb.pojo.Province;
 
 public class Entry {
@@ -55,12 +56,43 @@ public class Entry {
 	    			System.out.println(str);
 	    			String[] information = str.split("\\s+");
 	    			//System.out.println(information[0]);
-	    			String province = information[0];//先取到省份
+	    			String provinceName = information[0];//先取到省份
 	    			int number = getNumber(information);//取出各行人数
 	    			//System.out.println(number);
 	    			
-	    			if(map.get(province) == null) {
-	    				Province p = 
+	    			if(map.get(provinceName) != null) {
+	    				Province province = map.get(provinceName);
+	    				Map<String, Date> dateMap = province.getDateMap();
+	    				Date date;
+	    				
+	    				if(dateMap.get(fileDate) != null) {
+	    					date = province.getDateMap().get(fileDate);
+	    				}
+	    				else {
+	    					date = new Date();
+	    					date.setDate(fileDate);
+	    				}
+	    				
+	    				
+	    				
+	    				switch (information[1]) {
+						case "新增":
+							if(information[2].equals("感染患者")) {
+								int ip = date.getIp();
+								ip += number;
+								date.setIp(ip);
+							}
+							else {//疑似患者的情况
+								int sp = date.getSp();
+								sp += number;
+								date.setSp(sp);
+							}
+							break;
+
+						default:
+							break;
+						}
+	    				dateMap.put(fileDate, date);
 	    			}
 	    		}			
 	    		bf.close();		
