@@ -44,15 +44,7 @@ public class Entry {
 		for(String aFile : fileList) {
 			String fileDate = aFile.substring(0, aFile.indexOf("."));
 			
-			//初始化"全国"
-			Date nationwideDate;
-			if(nationwide.getDateMap().get(fileDate) != null) {
-				nationwideDate = nationwide.getDateMap().get(fileDate);
-			}
-			else {
-				nationwideDate = new Date();
-				nationwideDate.setDate(fileDate);
-			}
+			Date nationwideDate = new Date();
 			
 			try {
 	    		File file = new File(path + "\\" + aFile);
@@ -92,11 +84,19 @@ public class Entry {
 								int ip = date.getIp();
 								ip += number;
 								date.setIp(ip);
+								
+								int nationwideIp = nationwideDate.getIp();
+								nationwideIp += number;
+								nationwideDate.setIp(nationwideIp);
 							}
 							else {//疑似患者的情况
 								int sp = date.getSp();
 								sp += number;
 								date.setSp(sp);
+								
+								int nationwideSp = nationwideDate.getSp();
+								nationwideSp += number;
+								nationwideDate.setSp(nationwideSp);
 							}
 							break;
 						case "治愈":
@@ -106,6 +106,10 @@ public class Entry {
 							ip1 -= number;
 							date.setCure(cure);
 							date.setIp(ip1);
+							
+							int nationwideCure = nationwideDate.getCure();
+							nationwideCure += number;
+							nationwideDate.setCure(nationwideCure);
 							break;
 						case "死亡":
 							int dead = date.getDead();
@@ -114,11 +118,16 @@ public class Entry {
 							ip2 -= number;
 							date.setDead(dead);
 							date.setIp(ip2);
+							
+							int nationwideDead = nationwideDate.getDead();
+							nationwideDead += number;
+							nationwideDate.setDead(nationwideDead);
 							break;
 						default:
 							break;
 						}
 	    				dateMap.put(fileDate, date);
+	    				nationwide.getDateMap().put(fileDate, nationwideDate);
 	    			}
 	    		}			
 	    		bf.close();		
