@@ -88,7 +88,13 @@ public class Entry {
 								date.setSp(sp);
 							}
 							break;
-
+						case "ÖÎÓú":
+							int cure = date.getCure();
+							cure += number;
+							date.setCure(cure);
+							break;
+						
+							
 						default:
 							break;
 						}
