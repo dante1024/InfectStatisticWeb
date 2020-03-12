@@ -7,6 +7,10 @@ public class Date {
 	private int cure;
 	private int dead;
 	
+	public Date() {
+		ip = sp = cure = dead = 0;
+	}
+	
 	public String getDate() {
 		return date;
 	}
