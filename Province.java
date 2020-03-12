@@ -1,10 +1,12 @@
 package edu.fzu.InfectStatisticWeb.pojo;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Province {
 	private String name;
-	private List<Date> dateList;
+	private Map<String, Date> dateMap = new HashMap<String, Date>();;
 	
 	public String getName() {
 		return name;
@@ -14,11 +16,11 @@ public class Province {
 		this.name = name;
 	}
 	
-	public List<Date> getDateList(){
-		return dateList;
+	public Map<String, Date> getDateMap(){
+		return dateMap;
 	}
 	
-	public void addDate(Date d) {
-		dateList.add(d);
+	public void addDate(String dateStr, Date date) {
+		dateMap.put(dateStr, date);
 	}
 }
