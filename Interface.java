@@ -96,6 +96,48 @@ public class Interface {
 		
 		return result;
 	}
+	
+	/*
+	 * 返回某一天的趋势
+	 */
+	public int[] tendencyOfAnyDay(String dateStr, String provinceName) {
+		// TODO Auto-generated method stub
+		String[] dateList = {
+				"2020-01-19", "2020-01-20", "2020-01-21", "2020-01-22", "2020-01-23", "2020-01-24", 
+				"2020-01-25", "2020-01-26", "2020-01-27", "2020-01-28", "2020-01-29", "2020-01-30", "2020-01-31",
+				"2020-02-01", "2020-02-02"
+		};
+		List<String> dateArrayList = new ArrayList<String>();
+		for (int i=0;i<dateList.length;i++)
+		{
+			dateArrayList.add(dateList[i]);
+		}
+		
+		int[] result = {0, 0, 0, 0};//依次为ip sp cure dead
+		Province province = Entry.map.get(provinceName);
+		Map<String, Date> dateMap = province.getDateMap();
+		if(dateStr.equals("2020-01-19")) {
+			Date date = dateMap.get(dateStr);
+			result[0] = date.getIp();
+			result[1] = date.getSp();
+			result[2] = date.getCure();
+			result[3] = date.getDead();
+		}
+		else {
+			int index = dateArrayList.indexOf(dateStr) - 1;
+			String previousDateStr = dateArrayList.get(index);
+			Date date = dateMap.get(dateStr);
+			Date previousDate = dateMap.get(previousDateStr);
+			
+			result[0] = date.getIp() - previousDate.getIp();
+			result[1] = date.getSp() - previousDate.getSp();
+			result[2] = date.getCure() - previousDate.getCure();
+			result[3] = date.getDead() - previousDate.getDead();
+		}
+		
+		return result;
+	}
+	
 	/*
 	 * 获取符合条件的日期
 	 */
