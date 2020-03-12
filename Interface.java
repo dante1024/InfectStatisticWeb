@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -19,7 +20,7 @@ public class Interface {
 				"2020-02-01", "2020-02-02"
 		};
 		Province nationWide = Entry.map.get("全国");
-		
+		Map<String, Date> dateMap = nationWide.getDateMap();
 		for(String dateString : dateList) {
 			Date anyDate = dateMap.get(dateString);
 			result[0] += anyDate.getIp();
@@ -33,7 +34,7 @@ public class Interface {
 	/*
 	 * 返回某省信息
 	 */
-	public int[] anyProvince(String provinceName) {
+	public static int[] anyProvince(String provinceName) {
 		// TODO Auto-generated method stub
 		int[] result = {0, 0, 0, 0};//依次为ip sp cure dead
 		String[] dateList = {"2020-01-19", "2020-01-20", "2020-01-21", "2020-01-22", "2020-01-23", "2020-01-24", 
@@ -41,7 +42,7 @@ public class Interface {
 				"2020-02-01", "2020-02-02"
 		};
 		Province anyProvince = Entry.map.get("provinceName");
-		
+		Map<String, Date> dateMap = anyProvince.getDateMap();
 		for(String dateString : dateList) {
 			Date anyDate = dateMap.get(dateString);
 			result[0] += anyDate.getIp();
@@ -104,7 +105,7 @@ public class Interface {
 				"2020-01-25", "2020-01-26", "2020-01-27", "2020-01-28", "2020-01-29", "2020-01-30", "2020-01-31",
 				"2020-02-01", "2020-02-02"
 		};
-		List<String> targetList = null;
+		List<String> targetList = new ArrayList<String>();
 		for(String date : dateList) {
 			if(date.compareTo(dateStr) <= 0) {
 				targetList.add(date);

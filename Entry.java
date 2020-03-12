@@ -19,20 +19,27 @@ public class Entry {
 			"河南", "黑龙江", "湖北", "湖南", "吉林", "江苏", "江西", "辽宁", "内蒙古", "宁夏", "青海", "山东", "山西", "陕西",
 			"上海", "四川", "天津", "西藏", "新疆", "云南", "浙江"
 	};
+	public static String[] dateList = {"2020-01-19", "2020-01-20", "2020-01-21", "2020-01-22", "2020-01-23", "2020-01-24", 
+			"2020-01-25", "2020-01-26", "2020-01-27", "2020-01-28", "2020-01-29", "2020-01-30", "2020-01-31",
+			"2020-02-01", "2020-02-02"
+	};
 	public static void main(String[] args) {
 		initMap();
 		String[] fileList = getAllFile(path);
 		solveTheFile(fileList);
 		Province nationWide = Entry.map.get("全国");
-		System.out.println(nationWide.getDateMap().get("2020-01-21").getIp());
 //		System.out.println("Yes");
 	}
 	
-	private static void initMap() {
+	public static void initMap() {
 		// TODO Auto-generated method stub
 		for(String aProvince : province) {
 			Province p = new Province();
 			p.setName(aProvince);
+			Map<String, Date> dateMap = p.getDateMap();
+			for(String dateString : dateList) {
+				dateMap.put(dateString, new Date());
+			}
 			map.put(aProvince, p);
 		}
 	}
@@ -40,7 +47,7 @@ public class Entry {
 	/*
 	 * 处理每一个文件
 	 */
-	private static void solveTheFile(String[] fileList) {
+	public static void solveTheFile(String[] fileList) {
 		Province nationwide = map.get("全国");
 		// TODO Auto-generated method stub
 		for(String aFile : fileList) {
