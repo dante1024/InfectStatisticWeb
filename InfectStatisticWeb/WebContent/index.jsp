@@ -12,28 +12,95 @@
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-1.11.1.min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/echarts.min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/china.js"></script>
+
+<link rel="stylesheet" type="text/css" href="/InfectStatisticWeb/css/index.css" />
+
 </head>
 <body>
 
-<h1>hahaha</h1>
-<form action="/InfectStatisticWeb/1.jsp" method="post">
-	Date: <input type="date" name="user_date" />
-	<input type="submit" />
-
-<div id="container" style="height: 800px;width:1200px;background:white;margin:20px 0 0;"></div>
-
 <%
 	String path = "C:\\Users\\lenovo\\Desktop\\部分疫情日志log";
-	Entry entry=new Entry();
+	Entry entry = new Entry();
 	Entry.initMap();
 	String[] fileList = Entry.getAllFile(path);
 	Entry.solveTheFile(fileList);
+	String ip3String = null;
+	int ip3 = Interface.nationwideForDate("2020-01-20")[0] - Interface.nationwideForDate("2020-01-19")[0];
+	if (ip3 < 0){
+		ip3String=""+ip3;
+	}
+	else{
+		ip3String="+"+ip3;
+	}
 	
+	String sp3String = null;
+	int sp3 = Interface.nationwideForDate("2020-01-20")[1] - Interface.nationwideForDate("2020-01-19")[1];
+	if (sp3 < 0){
+		sp3String=""+sp3;
+	}
+	else{
+		sp3String="+"+sp3;
+	}
+	
+	String cure3String = null;
+	int cure3 = Interface.nationwideForDate("2020-01-20")[2] - Interface.nationwideForDate("2020-01-19")[2];
+	if (cure3 < 0){
+		cure3String=""+cure3;
+	}
+	else{
+		cure3String="+"+cure3;
+	}
+	
+	String dead3String = null;
+	int dead3 = Interface.nationwideForDate("2020-01-20")[3] - Interface.nationwideForDate("2020-01-19")[3];
+	if (dead3 < 0){
+		dead3String=""+dead3;
+	}
+	else{
+		dead3String="+"+dead3;
+	}
+	
+	
+	int total2 = Interface.nationwide()[0] + Interface.nationwide()[2] + Interface.nationwide()[3];
 	//int[] a=nationwide();
 //	int[] a=Interface.anyProvince("福建");
 //	int[] a=Interface.nationwideForDate("2020-01-20");
 	// int[] a=Interface.anyProvinceForDate("2020-01-19","湖北");
 %>
+
+
+
+<div id="information">
+	<h5 id="ip1">现有确诊</h5>
+	<h4 id="ip2"><%=Interface.nationwide()[0]%></h4>
+	<h5 id="ip3">昨日<%=ip3String%></h5>
+	<h5 id="sp1">现有疑似</h5>
+	<h4 id="sp2"><%=Interface.nationwide()[1]%></h4>
+	<h5 id="sp3">昨日<%=sp3String%></h5>
+	<h5 id="cure1">累计治愈</h5>
+	<h4 id="cure2"><%=Interface.nationwide()[2]%></h4>
+	<h5 id="cure3">昨日<%=cure3String%></h5>
+	<h5 id="dead1">累计死亡</h5>
+	<h4 id="dead2"><%=Interface.nationwide()[3]%></h4>
+	<h5 id="dead3">昨日<%=dead3String%></h5>
+	
+	
+	<h5 id="total1">累计确诊</h5>
+	<h4 id="total2"><%=total2%></h4>
+	
+	
+	
+</div>
+
+
+<form action="/InfectStatisticWeb/1.jsp" method="post">
+	选择日期: <input id="date" type="date" name="user_date" />
+	<input type="submit" value="查询"/>
+</form>
+
+<div id="container" style="height: 800px;width:1200px;background:white;margin:20px 0 0;"></div>
+
+
 
 
 <script type="text/javascript">

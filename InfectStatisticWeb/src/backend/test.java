@@ -11,10 +11,10 @@ public class test {
 		String[] fileList = Entry.getAllFile(path);
 		Entry.solveTheFile(fileList);
 		
-//		int[] a=nationwide();
+		int[] a=Interface.nationwide();
 //		int[] a=Interface.anyProvince("福建");
 //		int[] a=Interface.nationwideForDate("2020-01-20");
-		int[] a=Interface.anyProvinceForDate("2020-01-19","湖北");
+//		int[] a=Interface.anyProvinceForDate("2020-01-19","湖北");
 		
 		
 		System.out.println(a[0]);
