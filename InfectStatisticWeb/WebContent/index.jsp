@@ -138,13 +138,15 @@
     var ningxia=<%=Interface.anyProvince("宁夏")[0]%>;
     var hainan=<%=Interface.anyProvince("海南")[0]%>;
     
-    var dataMap = [{id:1, name: '北京',value:beijing }, { name: '天津',value:tianjin}, { name: '上海',value:shanghai }, { name: '重庆',value:chongqing }, 
-    	{ name: '河北',value:hebei }, { name: '河南',value:henan }, { name: '云南',value:yunnan }, { name: '辽宁',value:liaoning }, { name: '黑龙江',value:heilongjiang }, 
-    	{ name: '湖南',value:hunan }, { name: '安徽',value:anhui }, { name: '山东',value:shandong }, { name: '新疆',value:xinjiang }, { name: '江苏',value:jiangsu }, 
-    	{ name: '浙江',value:zhejiang }, { name: '江西',value:jiangxi }, { name: '湖北',value:hubei }, { name: '广西',value:guangxi }, { name: '甘肃',value:gansu }, 
-    	{ name: '山西',value:shanxi }, { name: '内蒙古',value:neimenggu },  { name: '陕西',value:shanxi2 }, { name: '吉林',value:jilin }, { name: '福建',value:fujian }, 
-    	{ name: '贵州',value:guizhou }, { name: '广东',value:guangdong }, { name: '青海',value:qinghai }, { name: '西藏',value:xizang }, { name: '四川',value:sichuan }, 
-    	{ name: '宁夏',value:ningxia }, { name: '海南',value:hainan }, { name: '台湾',value:"none" }, { name: '香港',value:"none"}, { name: '澳门',value:"none" }]
+    var dataMap = [{id:1, name: '北京',value:beijing }, {id:2, name: '天津',value:tianjin}, {id:3, name: '上海',value:shanghai }, {id:4, name: '重庆',value:chongqing }, 
+    	{id:5, name: '河北',value:hebei }, {id:6, name: '河南',value:henan }, {id:7, name: '云南',value:yunnan }, {id:8, name: '辽宁',value:liaoning }, 
+    	{id:9, name: '黑龙江',value:heilongjiang }, {id:10, name: '湖南',value:hunan }, {id:11, name: '安徽',value:anhui }, {id:12, name: '山东',value:shandong }, 
+    	{id:13, name: '新疆',value:xinjiang }, {id:14, name: '江苏',value:jiangsu }, {id:15, name: '浙江',value:zhejiang }, {id:16, name: '江西',value:jiangxi }, 
+    	{id:17, name: '湖北',value:hubei }, {id:18, name: '广西',value:guangxi }, {id:19, name: '甘肃',value:gansu }, {id:20, name: '山西',value:shanxi }, 
+    	{id:21, name: '内蒙古',value:neimenggu },  {id:22, name: '陕西',value:shanxi2 }, {id:23, name: '吉林',value:jilin }, {id:24, name: '福建',value:fujian }, 
+    	{id:25, name: '贵州',value:guizhou }, {id:26, name: '广东',value:guangdong }, {id:27, name: '青海',value:qinghai }, {id:28, name: '西藏',value:xizang }, 
+    	{id:29, name: '四川',value:sichuan }, {id:30, name: '宁夏',value:ningxia }, {id:31, name: '海南',value:hainan }, {id:32, name: '台湾',value:"none" }, 
+    	{id:33, name: '香港',value:"none"}, {id:34, name: '澳门',value:"none" }]
     // 需要在页面上直接标记出来的城市
     //var specialMap = ['浙江', '云南', '陕西'];
     var specialMap = [];
@@ -159,17 +161,7 @@
         }
     }
     // 绘制图表，准备数据
-    
-    <%
-    	//a aa=new a();
-    	//String s=aa.g();
-    
-    %>
-    
-    var a=66;
-    
-    	
-    
+   
     var option = {
         tooltip: {
             formatter: function (params) {
@@ -234,7 +226,7 @@
     myChart.setOption(option);
     myChart.on('click', function (params) {
         console.log(params.data.id);
-        window.location.href="1.jsp?id="+params.data.name;	
+        window.location.href="statistics.jsp?id="+params.data.id;	
         
     });
     
