@@ -15,7 +15,10 @@
 </head>
 <body>
 
-
+<h1>hahaha</h1>
+<form action="/InfectStatisticWeb/1.jsp" method="post">
+	Date: <input type="date" name="user_date" />
+	<input type="submit" />
 
 <div id="container" style="height: 800px;width:1200px;background:white;margin:20px 0 0;"></div>
 
@@ -76,7 +79,8 @@
     	{ name: '贵州',value:guizhou }, { name: '广东',value:guangdong }, { name: '青海',value:qinghai }, { name: '西藏',value:xizang }, { name: '四川',value:sichuan }, 
     	{ name: '宁夏',value:ningxia }, { name: '海南',value:hainan }, { name: '台湾',value:"none" }, { name: '香港',value:"none"}, { name: '澳门',value:"none" }]
     // 需要在页面上直接标记出来的城市
-    var specialMap = ['浙江', '云南', '陕西'];
+    //var specialMap = ['浙江', '云南', '陕西'];
+    var specialMap = [];
     // 对dataMap进行处理，使其可以直接在页面上展示
     for (var i = 0; i < specialMap.length; i++) {
         for (var j = 0; j < dataMap.length; j++) {
@@ -102,10 +106,11 @@
     var option = {
         tooltip: {
             formatter: function (params) {
-                var info = '<p style="font-size:18px">' + params.name + '</p><p style="font-size:14px">'+params.value+'</p>'
+                var info = '<p style="font-size:18px">' + params.name + '</p><p style="font-size:14px">'+'确诊：'+params.value+'人'+'</p>'
                 return info;
             },
-            backgroundColor: "#ff7f50",//提示标签背景颜色
+            //提示标签背景颜色
+            backgroundColor:"rgba(0,0,255,0.5)",
             textStyle: { color: "#fff" } //提示标签字体颜色
         },
         series: [
@@ -121,7 +126,7 @@
                     },
                     emphasis: {
                         show: true,//对应的鼠标悬浮效果
-                        // textStyle:{color:"#800080"}
+                        //textStyle:{color:"#00FFFF"}
                     }
                 },
                 itemStyle: {
@@ -133,12 +138,28 @@
                     emphasis: {
                         borderWidth: .5,
                         borderColor: '#4b0082',
-                        areaColor: "#ffdead",
+                        areaColor: "#00FFFF",
                     }
                 },
                 data: dataMap
             }
-        ]
+        ],
+        
+        visualMap: {
+            show : true,
+            x: 'left',
+            y: 'bottom',
+            splitList: [
+                {start: 10000},
+                {start: 1000, end: 9999},
+                {start: 100, end: 999},
+                {start: 10, end: 99},
+                {start: 1, end: 9},
+                {start: 0, end: 0},
+            ],
+            color: ['#660208', '#8C0D0D', '#CC2929','#FF7B69' ,'#FFAA85' , '#F8F9FA']
+        },
+        
     };
     //初始化echarts实例
     var myChart = echarts.init(document.getElementById('container'));
