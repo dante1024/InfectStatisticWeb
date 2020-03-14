@@ -4,6 +4,8 @@
 <%@page import="java.util.HashMap" %>
 <%@page import="backend.Entry" %>
 <%@page import="backend.Interface" %>
+<%@page import="java.util.ArrayList" %>
+<%@page import="java.util.List" %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -133,45 +135,100 @@
 	
 	Map<String, int []> dateMap = Interface.tendencyOfAll(province);
 	
+	String userDate = request.getParameter("user_date");
 	
+	int ip2String = 0;
 	String ip3String = null;
-	int ip3 = Interface.anyProvinceForDate("2020-02-02",province)[0] - Interface.anyProvinceForDate("2020-02-02",province)[0];
-	if (ip3 < 0){
-		ip3String=""+ip3;
-	}
-	else{
-		ip3String="+"+ip3;
-	}
-	
-	String sp3String = null;
-	int sp3 = Interface.anyProvinceForDate("2020-02-02",province)[1] - Interface.anyProvinceForDate("2020-02-01",province)[1];
-	if (sp3 < 0){
-		sp3String=""+sp3;
-	}
-	else{
-		sp3String="+"+sp3;
-	}
-	
+	int cure2String = 0;
 	String cure3String = null;
-	int cure3 = Interface.anyProvinceForDate("2020-02-02",province)[2] - Interface.anyProvinceForDate("2020-02-01",province)[2];
-	if (cure3 < 0){
-		cure3String=""+cure3;
+	int dead2String = 0;
+	String dead3String = null;
+	int total2=0;
+
+	if (userDate.equals("") || userDate==null){
+		userDate="是空指针";
+		
+		ip2String=Interface.anyProvince(province)[0];
+		int ip3 = Interface.anyProvinceForDate("2020-02-02",province)[0] - Interface.anyProvinceForDate("2020-02-02",province)[0];
+		if (ip3 < 0){
+			ip3String = "" + ip3;
+		}
+		else{
+			ip3String = "+" + ip3;
+		}
+		
+		cure2String = Interface.anyProvince(province)[2];
+		int cure3 = Interface.anyProvinceForDate("2020-02-02",province)[2] - Interface.anyProvinceForDate("2020-02-01",province)[2];
+		if (cure3 < 0){
+			cure3String=""+cure3;
+		}
+		else{
+			cure3String="+"+cure3;
+		}
+		
+		dead2String = Interface.anyProvince(province)[3];
+		int dead3 = Interface.anyProvinceForDate("2020-02-02",province)[3] - Interface.anyProvinceForDate("2020-02-01",province)[3];
+		if (dead3 < 0){
+			dead3String=""+dead3;
+		}
+		else{
+			dead3String="+"+dead3;
+		}
+
+		total2 = ip2String + cure2String + dead2String;
+
+		
 	}
 	else{
-		cure3String="+"+cure3;
+		
+		//userDate="**"+userDate+"**";
+		
+		String[] dateList = {
+				"2020-01-19", "2020-01-20", "2020-01-21", "2020-01-22", "2020-01-23", "2020-01-24", 
+				"2020-01-25", "2020-01-26", "2020-01-27", "2020-01-28", "2020-01-29", "2020-01-30", "2020-01-31",
+				"2020-02-01", "2020-02-02"
+		};
+		List<String> dateArrayList = new ArrayList<String>();
+		for (int i=0;i < dateList.length;i++)
+		{
+			dateArrayList.add(dateList[i]);
+		}
+		int index = dateArrayList.indexOf(userDate) - 1;
+		String previousDate = dateArrayList.get(index);
+		
+		ip2String=Interface.anyProvinceForDate(userDate,province)[0];
+		int ip3 = Interface.anyProvinceForDate(userDate,province)[0] - Interface.anyProvinceForDate(previousDate,province)[0];
+		if (ip3 < 0){
+			ip3String=""+ip3;
+		}
+		else{
+			ip3String="+"+ip3;
+		}
+		
+		cure2String=Interface.anyProvinceForDate(userDate,province)[2];
+		int cure3 = Interface.anyProvinceForDate(userDate,province)[2] - Interface.anyProvinceForDate(previousDate,province)[2];
+		if (cure3 < 0){
+			cure3String=""+cure3;
+		}
+		else{
+			cure3String="+"+cure3;
+		}
+		
+		dead2String=Interface.anyProvinceForDate(userDate,province)[3];
+		int dead3 = Interface.anyProvinceForDate(userDate,province)[3] - Interface.anyProvinceForDate(previousDate,province)[3];
+		if (dead3 < 0){
+			dead3String=""+dead3;
+		}
+		else{
+			dead3String="+"+dead3;
+		}
+
+		total2 = Interface.anyProvinceForDate(userDate,province)[0] + Interface.anyProvinceForDate(userDate,province)[2] + Interface.anyProvinceForDate(userDate,province)[3];
+
+		
 	}
 	
-	String dead3String = null;
-	int dead3 = Interface.anyProvinceForDate("2020-02-02",province)[3] - Interface.anyProvinceForDate("2020-02-01",province)[3];
-	if (dead3 < 0){
-		dead3String=""+dead3;
-	}
-	else{
-		dead3String="+"+dead3;
-	}
-
-	int total2 = Interface.anyProvince(province)[0] + Interface.anyProvince(province)[2] + Interface.anyProvince(province)[3];
-
+	
 	
 	
 %>
@@ -180,26 +237,27 @@
 
 <div id="information">
 	<h5 id="ip1">现有确诊</h5>
-	<h4 id="ip2"><%=Interface.anyProvince(province)[0]%></h4>
+	<h4 id="ip2"><%=ip2String%></h4>
 	<h5 id="ip3">昨日<%=ip3String%></h5>
 	<h5 id="total1">累计确诊</h5>
 	<h4 id="total2"><%=total2%></h4>
 	<h5 id="total3">昨日<%=ip3String%></h5>
 	<h5 id="cure1">累计治愈</h5>
-	<h4 id="cure2"><%=Interface.anyProvince(province)[2]%></h4>
+	<h4 id="cure2"><%=cure2String%></h4>
 	<h5 id="cure3">昨日<%=cure3String%></h5>
 	<h5 id="dead1">累计死亡</h5>
-	<h4 id="dead2"><%=Interface.anyProvince(province)[3]%></h4>
+	<h4 id="dead2"><%=dead2String%></h4>
 	<h5 id="dead3">昨日<%=dead3String%></h5>
 	
-	<h5 id="total1">累计确诊</h5>
-	<h4 id="total2"><%=total2%></h4>
 </div>
 
 
+<form action="/InfectStatisticWeb/statistics.jsp?id=<%=idString%>" method="post">
+	选择日期: <input id="date" type="date" name="user_date" />
+	<input type="submit" value="查询"/>
+</form>
 
-
-
+<h1><%=userDate %></h1>
 
 <div id="container" style="height: 600px;width:900px;background:white;margin:20px 0 0;"></div>
 
