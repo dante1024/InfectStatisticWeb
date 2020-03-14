@@ -1,6 +1,7 @@
 package backend;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -148,6 +149,31 @@ public class Interface {
 		}
 		
 		return result;
+	}
+	/*
+	 * 返回某省疫情
+	 */
+	public static Map<String, int []> tendencyOfAll(String provinceName){
+		String[] dateList = {
+				"2020-01-19", "2020-01-20", "2020-01-21", "2020-01-22", "2020-01-23", "2020-01-24", 
+				"2020-01-25", "2020-01-26", "2020-01-27", "2020-01-28", "2020-01-29", "2020-01-30", "2020-01-31",
+				"2020-02-01", "2020-02-02"
+		};
+		
+		int[] result = null;
+		Map<String, int []> tendencyMap = new HashMap<String, int []>();
+
+		for(String date : dateList) {
+			result=tendencyOfAnyDay(date, provinceName);
+			tendencyMap.put(date, result);
+		}
+		
+		
+		
+		
+		
+		
+		return tendencyMap;
 	}
 	
 	/*
