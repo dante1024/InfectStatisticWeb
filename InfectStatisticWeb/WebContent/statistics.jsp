@@ -133,8 +133,73 @@
 	
 	Map<String, int []> dateMap = Interface.tendencyOfAll(province);
 	
+	
+	String ip3String = null;
+	int ip3 = Interface.anyProvinceForDate("2020-02-02",province)[0] - Interface.anyProvinceForDate("2020-02-02",province)[0];
+	if (ip3 < 0){
+		ip3String=""+ip3;
+	}
+	else{
+		ip3String="+"+ip3;
+	}
+	
+	String sp3String = null;
+	int sp3 = Interface.anyProvinceForDate("2020-02-02",province)[1] - Interface.anyProvinceForDate("2020-02-01",province)[1];
+	if (sp3 < 0){
+		sp3String=""+sp3;
+	}
+	else{
+		sp3String="+"+sp3;
+	}
+	
+	String cure3String = null;
+	int cure3 = Interface.anyProvinceForDate("2020-02-02",province)[2] - Interface.anyProvinceForDate("2020-02-01",province)[2];
+	if (cure3 < 0){
+		cure3String=""+cure3;
+	}
+	else{
+		cure3String="+"+cure3;
+	}
+	
+	String dead3String = null;
+	int dead3 = Interface.anyProvinceForDate("2020-02-02",province)[3] - Interface.anyProvinceForDate("2020-02-01",province)[3];
+	if (dead3 < 0){
+		dead3String=""+dead3;
+	}
+	else{
+		dead3String="+"+dead3;
+	}
 
+	int total2 = Interface.anyProvince(province)[0] + Interface.anyProvince(province)[2] + Interface.anyProvince(province)[3];
+
+	
+	
 %>
+
+
+
+<div id="information">
+	<h5 id="ip1">现有确诊</h5>
+	<h4 id="ip2"><%=Interface.anyProvince(province)[0]%></h4>
+	<h5 id="ip3">昨日<%=ip3String%></h5>
+	<h5 id="total1">累计确诊</h5>
+	<h4 id="total2"><%=total2%></h4>
+	<h5 id="total3">昨日<%=ip3String%></h5>
+	<h5 id="cure1">累计治愈</h5>
+	<h4 id="cure2"><%=Interface.anyProvince(province)[2]%></h4>
+	<h5 id="cure3">昨日<%=cure3String%></h5>
+	<h5 id="dead1">累计死亡</h5>
+	<h4 id="dead2"><%=Interface.anyProvince(province)[3]%></h4>
+	<h5 id="dead3">昨日<%=dead3String%></h5>
+	
+	<h5 id="total1">累计确诊</h5>
+	<h4 id="total2"><%=total2%></h4>
+</div>
+
+
+
+
+
 
 <div id="container" style="height: 600px;width:900px;background:white;margin:20px 0 0;"></div>
 

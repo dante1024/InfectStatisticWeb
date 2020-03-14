@@ -25,7 +25,7 @@
 	String[] fileList = Entry.getAllFile(path);
 	Entry.solveTheFile(fileList);
 	String ip3String = null;
-	int ip3 = Interface.nationwideForDate("2020-01-20")[0] - Interface.nationwideForDate("2020-01-19")[0];
+	int ip3 = Interface.nationwideForDate("2020-02-02")[0] - Interface.nationwideForDate("2020-02-01")[0];
 	if (ip3 < 0){
 		ip3String=""+ip3;
 	}
@@ -34,7 +34,7 @@
 	}
 	
 	String sp3String = null;
-	int sp3 = Interface.nationwideForDate("2020-01-20")[1] - Interface.nationwideForDate("2020-01-19")[1];
+	int sp3 = Interface.nationwideForDate("2020-02-02")[1] - Interface.nationwideForDate("2020-02-01")[1];
 	if (sp3 < 0){
 		sp3String=""+sp3;
 	}
@@ -43,7 +43,7 @@
 	}
 	
 	String cure3String = null;
-	int cure3 = Interface.nationwideForDate("2020-01-20")[2] - Interface.nationwideForDate("2020-01-19")[2];
+	int cure3 = Interface.nationwideForDate("2020-02-02")[2] - Interface.nationwideForDate("2020-02-01")[2];
 	if (cure3 < 0){
 		cure3String=""+cure3;
 	}
@@ -52,7 +52,7 @@
 	}
 	
 	String dead3String = null;
-	int dead3 = Interface.nationwideForDate("2020-01-20")[3] - Interface.nationwideForDate("2020-01-19")[3];
+	int dead3 = Interface.nationwideForDate("2020-02-02")[3] - Interface.nationwideForDate("2020-02-01")[3];
 	if (dead3 < 0){
 		dead3String=""+dead3;
 	}
@@ -84,12 +84,8 @@
 	<h4 id="dead2"><%=Interface.nationwide()[3]%></h4>
 	<h5 id="dead3">昨日<%=dead3String%></h5>
 	
-	
 	<h5 id="total1">累计确诊</h5>
 	<h4 id="total2"><%=total2%></h4>
-	
-	
-	
 </div>
 
 
