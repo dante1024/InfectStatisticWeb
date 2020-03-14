@@ -145,8 +145,8 @@
 	String dead3String = null;
 	int total2=0;
 
-	if (userDate.equals("") || userDate==null){
-		userDate="是空指针";
+	if (userDate == null || userDate.equals("")){
+		userDate = "2020-02-02";
 		
 		ip2String=Interface.anyProvince(province)[0];
 		int ip3 = Interface.anyProvinceForDate("2020-02-02",province)[0] - Interface.anyProvinceForDate("2020-02-02",province)[0];
@@ -252,12 +252,12 @@
 </div>
 
 
-<form action="/InfectStatisticWeb/statistics.jsp?id=<%=idString%>" method="post">
-	选择日期: <input id="date" type="date" name="user_date" />
+<form id="date"  action="/InfectStatisticWeb/statistics.jsp?id=<%=idString%>" method="post">
+	选择日期: <input type="date" name="user_date" />
 	<input type="submit" value="查询"/>
 </form>
 
-<h1><%=userDate %></h1>
+<h1>当前日期：<%=userDate %></h1>
 
 <div id="container" style="height: 600px;width:900px;background:white;margin:20px 0 0;"></div>
 
