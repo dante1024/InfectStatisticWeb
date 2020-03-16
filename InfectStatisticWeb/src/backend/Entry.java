@@ -30,16 +30,9 @@ public class Entry {
 		solveTheFile(fileList);
 		Province nationWide = Entry.map.get("广东");
 		System.out.println(nationWide.getDateMap().get("2020-01-19").getIp());
-//		System.out.println("Yes");
 	}
 	
 	public static void initMap() {
-		// TODO Auto-generated method stub
-//		for(String aProvince : province) {
-//			Province p = new Province();
-//			p.setName(aProvince);
-//			map.put(aProvince, p);
-//		}
 		
 		for(String aProvince : province) {
 			Province p = new Province();
@@ -190,5 +183,12 @@ public class Entry {
 			}
 		}
 		return fileList;
+		
+		
+		
 	}
+	
+
+
+	
 }

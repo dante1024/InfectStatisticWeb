@@ -6,7 +6,7 @@
 <%@page import="java.util.List" %>
 <%@page import="java.util.Date" %>
 <%@page import="java.text.SimpleDateFormat" %>
-    
+    <%@page import="java.io.File" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -30,7 +30,7 @@
 	Entry.solveTheFile(fileList);
 	
 	
-	String userDate = request.getParameter("user_date");
+	String userDate = request.getParameter("user_date");//获取日期选择
 
 	int ip2String = 0;
 	String ip3String = null;
@@ -40,10 +40,9 @@
 	String cure3String = null;
 	int dead2String = 0;
 	String dead3String = null;
-	int total2=0;
+	int total2 = 0;
 	
-	
-	int beijing = 0;
+	int beijing = 0;//声明并初始化所有省份的确诊人数
     int tianjin = 0;
     int shanghai = 0;
     int chongqing = 0;
@@ -75,81 +74,79 @@
     int ningxia = 0;
     int hainan = 0;
 	
-	System.out.println(userDate);
 	
-	if (userDate == null || userDate.equals("")){
+	if (userDate == null || userDate.equals("")){//如果没有选择日期，默认统计到当前日期
 		userDate="2020-02-02";
 		
-		ip2String = Interface.nationwide()[0];
-		int ip3 = Interface.nationwideForDate("2020-02-02")[0] - Interface.nationwideForDate("2020-02-01")[0];
+		ip2String = Interface.nationwide()[0];//确诊人数
+		int ip3 = Interface.nationwideForDate("2020-02-02")[0] - Interface.nationwideForDate("2020-02-01")[0];//确诊人数增长
 		if (ip3 < 0){
-			ip3String=""+ip3;
+			ip3String = "" + ip3;
 		}
 		else{
-			ip3String="+"+ip3;
+			ip3String = "+" + ip3;
 		}
 		
-		sp2String = Interface.nationwide()[1];
-		int sp3 = Interface.nationwideForDate("2020-02-02")[1] - Interface.nationwideForDate("2020-02-01")[1];
+		sp2String = Interface.nationwide()[1];//疑似人数
+		int sp3 = Interface.nationwideForDate("2020-02-02")[1] - Interface.nationwideForDate("2020-02-01")[1];//疑似人数增长
 		if (sp3 < 0){
-			sp3String=""+sp3;
+			sp3String = "" + sp3;
 		}
 		else{
-			sp3String="+"+sp3;
+			sp3String = "+" + sp3;
 		}
 		
-		cure2String = Interface.nationwide()[2];
-		int cure3 = Interface.nationwideForDate("2020-02-02")[2] - Interface.nationwideForDate("2020-02-01")[2];
+		cure2String = Interface.nationwide()[2];//治愈人数
+		int cure3 = Interface.nationwideForDate("2020-02-02")[2] - Interface.nationwideForDate("2020-02-01")[2];//治愈人数增长
 		if (cure3 < 0){
-			cure3String=""+cure3;
+			cure3String = "" + cure3;
 		}
 		else{
-			cure3String="+"+cure3;
+			cure3String = "+" + cure3;
 		}
 		
-		dead2String = Interface.nationwide()[3];
-		int dead3 = Interface.nationwideForDate("2020-02-02")[3] - Interface.nationwideForDate("2020-02-01")[3];
+		dead2String = Interface.nationwide()[3];//死亡人数
+		int dead3 = Interface.nationwideForDate("2020-02-02")[3] - Interface.nationwideForDate("2020-02-01")[3];//死亡人数增长
 		if (dead3 < 0){
-			dead3String=""+dead3;
+			dead3String = "" + dead3;
 		}
 		else{
-			dead3String="+"+dead3;
+			dead3String = "+" + dead3;
 		}
 		
 		total2 = ip2String + cure2String + dead2String;
 		
-		
-		beijing=Interface.anyProvince("北京")[0];
-	    tianjin=Interface.anyProvince("天津")[0];
-	    shanghai=Interface.anyProvince("上海")[0];
-	    chongqing=Interface.anyProvince("重庆")[0];
-	    hebei=Interface.anyProvince("河北")[0];
-	    henan=Interface.anyProvince("河南")[0];
-	    yunnan=Interface.anyProvince("云南")[0];
-	    liaoning=Interface.anyProvince("辽宁")[0];
-	    heilongjiang=Interface.anyProvince("黑龙江")[0];
-	    hunan=Interface.anyProvince("湖南")[0];
-	    anhui=Interface.anyProvince("安徽")[0];
-	    shandong=Interface.anyProvince("山东")[0];
-	    xinjiang=Interface.anyProvince("新疆")[0];
-	    jiangsu=Interface.anyProvince("江苏")[0];
-	    zhejiang=Interface.anyProvince("浙江")[0];
-	    jiangxi=Interface.anyProvince("江西")[0];
-	    hubei=Interface.anyProvince("湖北")[0];
-	    guangxi=Interface.anyProvince("广西")[0];
-	    gansu=Interface.anyProvince("甘肃")[0];
-	    shanxi=Interface.anyProvince("山西")[0];
-	    neimenggu=Interface.anyProvince("内蒙古")[0];
-	    shanxi2=Interface.anyProvince("陕西")[0];
-	    jilin=Interface.anyProvince("吉林")[0];
-	    fujian=Interface.anyProvince("福建")[0];
-	    guizhou=Interface.anyProvince("贵州")[0];
-	    guangdong=Interface.anyProvince("广东")[0];
-	    qinghai=Interface.anyProvince("青海")[0];
-	    xizang=Interface.anyProvince("西藏")[0];
-	    sichuan=Interface.anyProvince("四川")[0];
-	    ningxia=Interface.anyProvince("宁夏")[0];
-	    hainan=Interface.anyProvince("海南")[0];
+		beijing = Interface.anyProvince("北京")[0];
+	    tianjin = Interface.anyProvince("天津")[0];
+	    shanghai = Interface.anyProvince("上海")[0];
+	    chongqing = Interface.anyProvince("重庆")[0];
+	    hebei = Interface.anyProvince("河北")[0];
+	    henan = Interface.anyProvince("河南")[0];
+	    yunnan = Interface.anyProvince("云南")[0];
+	    liaoning = Interface.anyProvince("辽宁")[0];
+	    heilongjiang = Interface.anyProvince("黑龙江")[0];
+	    hunan = Interface.anyProvince("湖南")[0];
+	    anhui = Interface.anyProvince("安徽")[0];
+	    shandong = Interface.anyProvince("山东")[0];
+	    xinjiang = Interface.anyProvince("新疆")[0];
+	    jiangsu = Interface.anyProvince("江苏")[0];
+	    zhejiang = Interface.anyProvince("浙江")[0];
+	    jiangxi = Interface.anyProvince("江西")[0];
+	    hubei = Interface.anyProvince("湖北")[0];
+	    guangxi = Interface.anyProvince("广西")[0];
+	    gansu = Interface.anyProvince("甘肃")[0];
+	    shanxi = Interface.anyProvince("山西")[0];
+	    neimenggu = Interface.anyProvince("内蒙古")[0];
+	    shanxi2 = Interface.anyProvince("陕西")[0];
+	    jilin = Interface.anyProvince("吉林")[0];
+	    fujian = Interface.anyProvince("福建")[0];
+	    guizhou = Interface.anyProvince("贵州")[0];
+	    guangdong = Interface.anyProvince("广东")[0];
+	    qinghai = Interface.anyProvince("青海")[0];
+	    xizang = Interface.anyProvince("西藏")[0];
+	    sichuan = Interface.anyProvince("四川")[0];
+	    ningxia = Interface.anyProvince("宁夏")[0];
+	    hainan = Interface.anyProvince("海南")[0];
 	    
 	    Date today=new Date();
 	    SimpleDateFormat simpleDateFormat=new SimpleDateFormat("yyyy-MM-dd");
@@ -157,7 +154,7 @@
 	}
 	else{
 		String temp = userDate;
-		if (userDate.compareTo("2020-01-19") >= 0){
+		if (userDate.compareTo("2020-01-19") > 0){
 			if (userDate.compareTo("2020-02-02") > 0){
 				userDate = "2020-02-02";
 			}
@@ -171,6 +168,8 @@
 			{
 				dateArrayList.add(dateList[i]);
 			}
+			
+			
 			int index = dateArrayList.indexOf(userDate) - 1;
 			String previousDate = dateArrayList.get(index);
 			
@@ -245,20 +244,26 @@
 		    hainan=Interface.anyProvinceForDate(userDate,"海南")[0];
 			
 		}
-		else {
+		else if (userDate.compareTo("2020-01-19") == 0) {
+			ip2String = Interface.nationwideForDate("2020-01-19")[0];
+			sp2String = Interface.nationwideForDate("2020-01-19")[1];
+			cure2String = Interface.nationwideForDate("2020-01-19")[2];
+			dead2String = Interface.nationwideForDate("2020-01-19")[3];
+			ip3String = "+"+ip2String;
+			sp3String = "+"+sp2String;
+			cure3String = "+"+cure2String;
+			dead3String = "+"+dead2String;
+		}
+		else {//如果选择日期在202-01-19之前，则认为所有地区的疫情人数为0
 			ip3String = "+0";
 			sp3String = "+0";
 			cure3String = "+0";
 			dead3String = "+0";
 		}
-		
 	    userDate = temp;
 	}
-	
-	
+
 %>
-
-
 
 <div id="information">
 	<h5 id="ip1">现有确诊</h5>
@@ -273,25 +278,20 @@
 	<h5 id="dead1">累计死亡</h5>
 	<h4 id="dead2"><%=dead2String%></h4>
 	<h5 id="dead3">昨日<%=dead3String%></h5>
-	
 	<h5 id="total1">累计确诊</h5>
 	<h4 id="total2"><%=total2%></h4>
 </div>
-
 
 <form action="/InfectStatisticWeb/index.jsp" method="post">
 	选择日期: <input id="date" type="date" name="user_date" />
 	<input type="submit" value="查询"/>
 </form>
 
-
 <h1>当前日期：<%=userDate %></h1>
 
 <div id="container" style="height: 800px;width:1200px;background:white;"></div>
 
-
 <script type="text/javascript">
-    // 全国省份列表
     
     var beijing=<%=beijing%>;
     var tianjin=<%=tianjin%>;
@@ -334,19 +334,7 @@
     	{id:25, name: '贵州',value:guizhou }, {id:26, name: '广东',value:guangdong }, {id:27, name: '青海',value:qinghai }, {id:28, name: '西藏',value:xizang }, 
     	{id:29, name: '四川',value:sichuan }, {id:30, name: '宁夏',value:ningxia }, {id:31, name: '海南',value:hainan }, {id:32, name: '台湾',value:"none" }, 
     	{id:33, name: '香港',value:"none"}, {id:34, name: '澳门',value:"none" }]
-    // 需要在页面上直接标记出来的城市
-    //var specialMap = ['浙江', '云南', '陕西'];
-    var specialMap = [];
-    // 对dataMap进行处理，使其可以直接在页面上展示
-    for (var i = 0; i < specialMap.length; i++) {
-        for (var j = 0; j < dataMap.length; j++) {
-            if (specialMap[i] == dataMap[j].name) {
-                dataMap[j].selected = true;
-                break;
-            }
-
-        }
-    }
+    
     // 绘制图表，准备数据
    
     var option = {
