@@ -4,7 +4,8 @@
 <%@page import="backend.Interface" %>
 <%@page import="java.util.ArrayList" %>
 <%@page import="java.util.List" %>
-
+<%@page import="java.util.Date" %>
+<%@page import="java.text.SimpleDateFormat" %>
     
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -149,93 +150,109 @@
 	    sichuan=Interface.anyProvince("四川")[0];
 	    ningxia=Interface.anyProvince("宁夏")[0];
 	    hainan=Interface.anyProvince("海南")[0];
+	    
+	    Date today=new Date();
+	    SimpleDateFormat simpleDateFormat=new SimpleDateFormat("yyyy-MM-dd");
+	    userDate = simpleDateFormat.format(today);
 	}
 	else{
-		
-		String[] dateList = {
-				"2020-01-19", "2020-01-20", "2020-01-21", "2020-01-22", "2020-01-23", "2020-01-24", 
-				"2020-01-25", "2020-01-26", "2020-01-27", "2020-01-28", "2020-01-29", "2020-01-30", "2020-01-31",
-				"2020-02-01", "2020-02-02"
-		};
-		List<String> dateArrayList = new ArrayList<String>();
-		for (int i=0;i < dateList.length;i++)
-		{
-			dateArrayList.add(dateList[i]);
+		String temp = userDate;
+		if (userDate.compareTo("2020-01-19") >= 0){
+			if (userDate.compareTo("2020-02-02") > 0){
+				userDate = "2020-02-02";
+			}
+			String[] dateList = {
+					"2020-01-19", "2020-01-20", "2020-01-21", "2020-01-22", "2020-01-23", "2020-01-24", 
+					"2020-01-25", "2020-01-26", "2020-01-27", "2020-01-28", "2020-01-29", "2020-01-30", "2020-01-31",
+					"2020-02-01", "2020-02-02"
+			};
+			List<String> dateArrayList = new ArrayList<String>();
+			for (int i=0;i < dateList.length;i++)
+			{
+				dateArrayList.add(dateList[i]);
+			}
+			int index = dateArrayList.indexOf(userDate) - 1;
+			String previousDate = dateArrayList.get(index);
+			
+			ip2String = Interface.nationwideForDate(userDate)[0];
+			int ip3 = Interface.nationwideForDate(userDate)[0] - Interface.nationwideForDate(previousDate)[0];
+			if (ip3 < 0){
+				ip3String=""+ip3;
+			}
+			else{
+				ip3String="+"+ip3;
+			}
+			
+			sp2String = Interface.nationwideForDate(userDate)[1];
+			int sp3 = Interface.nationwideForDate(userDate)[1] - Interface.nationwideForDate(previousDate)[1];
+			if (sp3 < 0){
+				sp3String=""+sp3;
+			}
+			else{
+				sp3String="+"+sp3;
+			}
+			
+			cure2String = Interface.nationwideForDate(userDate)[2];
+			int cure3 = Interface.nationwideForDate(userDate)[2] - Interface.nationwideForDate(previousDate)[2];
+			if (cure3 < 0){
+				cure3String=""+cure3;
+			}
+			else{
+				cure3String="+"+cure3;
+			}
+			
+			dead2String = Interface.nationwideForDate(userDate)[3];
+			int dead3 = Interface.nationwideForDate(userDate)[3] - Interface.nationwideForDate(previousDate)[3];
+			if (dead3 < 0){
+				dead3String=""+dead3;
+			}
+			else{
+				dead3String="+"+dead3;
+			}
+			
+			total2 = ip2String + cure2String + dead2String;		
+			
+			beijing=Interface.anyProvinceForDate(userDate,"北京")[0];
+		    tianjin=Interface.anyProvinceForDate(userDate,"天津")[0];
+		    shanghai=Interface.anyProvinceForDate(userDate,"上海")[0];
+		    chongqing=Interface.anyProvinceForDate(userDate,"重庆")[0];
+		    hebei=Interface.anyProvinceForDate(userDate,"河北")[0];
+		    henan=Interface.anyProvinceForDate(userDate,"河南")[0];
+		    yunnan=Interface.anyProvinceForDate(userDate,"云南")[0];
+		    liaoning=Interface.anyProvinceForDate(userDate,"辽宁")[0];
+		    heilongjiang=Interface.anyProvinceForDate(userDate,"黑龙江")[0];
+		    hunan=Interface.anyProvinceForDate(userDate,"湖南")[0];
+		    anhui=Interface.anyProvinceForDate(userDate,"安徽")[0];
+		    shandong=Interface.anyProvinceForDate(userDate,"山东")[0];
+		    xinjiang=Interface.anyProvinceForDate(userDate,"新疆")[0];
+		    jiangsu=Interface.anyProvinceForDate(userDate,"江苏")[0];
+		    zhejiang=Interface.anyProvinceForDate(userDate,"浙江")[0];
+		    jiangxi=Interface.anyProvinceForDate(userDate,"江西")[0];
+		    hubei=Interface.anyProvinceForDate(userDate,"湖北")[0];
+		    guangxi=Interface.anyProvinceForDate(userDate,"广西")[0];
+		    gansu=Interface.anyProvinceForDate(userDate,"甘肃")[0];
+		    shanxi=Interface.anyProvinceForDate(userDate,"山西")[0];
+		    neimenggu=Interface.anyProvinceForDate(userDate,"内蒙古")[0];
+		    shanxi2=Interface.anyProvinceForDate(userDate,"陕西")[0];
+		    jilin=Interface.anyProvinceForDate(userDate,"吉林")[0];
+		    fujian=Interface.anyProvinceForDate(userDate,"福建")[0];
+		    guizhou=Interface.anyProvinceForDate(userDate,"贵州")[0];
+		    guangdong=Interface.anyProvinceForDate(userDate,"广东")[0];
+		    qinghai=Interface.anyProvinceForDate(userDate,"青海")[0];
+		    xizang=Interface.anyProvinceForDate(userDate,"西藏")[0];
+		    sichuan=Interface.anyProvinceForDate(userDate,"四川")[0];
+		    ningxia=Interface.anyProvinceForDate(userDate,"宁夏")[0];
+		    hainan=Interface.anyProvinceForDate(userDate,"海南")[0];
+			
 		}
-		int index = dateArrayList.indexOf(userDate) - 1;
-		String previousDate = dateArrayList.get(index);
-		
-		ip2String = Interface.nationwideForDate(userDate)[0];
-		int ip3 = Interface.nationwideForDate(userDate)[0] - Interface.nationwideForDate(previousDate)[0];
-		if (ip3 < 0){
-			ip3String=""+ip3;
-		}
-		else{
-			ip3String="+"+ip3;
+		else {
+			ip3String = "+0";
+			sp3String = "+0";
+			cure3String = "+0";
+			dead3String = "+0";
 		}
 		
-		sp2String = Interface.nationwideForDate(userDate)[1];
-		int sp3 = Interface.nationwideForDate(userDate)[1] - Interface.nationwideForDate(previousDate)[1];
-		if (sp3 < 0){
-			sp3String=""+sp3;
-		}
-		else{
-			sp3String="+"+sp3;
-		}
-		
-		cure2String = Interface.nationwideForDate(userDate)[2];
-		int cure3 = Interface.nationwideForDate(userDate)[2] - Interface.nationwideForDate(previousDate)[2];
-		if (cure3 < 0){
-			cure3String=""+cure3;
-		}
-		else{
-			cure3String="+"+cure3;
-		}
-		
-		dead2String = Interface.nationwideForDate(userDate)[3];
-		int dead3 = Interface.nationwideForDate(userDate)[3] - Interface.nationwideForDate(previousDate)[3];
-		if (dead3 < 0){
-			dead3String=""+dead3;
-		}
-		else{
-			dead3String="+"+dead3;
-		}
-		
-		total2 = ip2String + cure2String + dead2String;		
-		
-		beijing=Interface.anyProvinceForDate(userDate,"北京")[0];
-	    tianjin=Interface.anyProvinceForDate(userDate,"天津")[0];
-	    shanghai=Interface.anyProvinceForDate(userDate,"上海")[0];
-	    chongqing=Interface.anyProvinceForDate(userDate,"重庆")[0];
-	    hebei=Interface.anyProvinceForDate(userDate,"河北")[0];
-	    henan=Interface.anyProvinceForDate(userDate,"河南")[0];
-	    yunnan=Interface.anyProvinceForDate(userDate,"云南")[0];
-	    liaoning=Interface.anyProvinceForDate(userDate,"辽宁")[0];
-	    heilongjiang=Interface.anyProvinceForDate(userDate,"黑龙江")[0];
-	    hunan=Interface.anyProvinceForDate(userDate,"湖南")[0];
-	    anhui=Interface.anyProvinceForDate(userDate,"安徽")[0];
-	    shandong=Interface.anyProvinceForDate(userDate,"山东")[0];
-	    xinjiang=Interface.anyProvinceForDate(userDate,"新疆")[0];
-	    jiangsu=Interface.anyProvinceForDate(userDate,"江苏")[0];
-	    zhejiang=Interface.anyProvinceForDate(userDate,"浙江")[0];
-	    jiangxi=Interface.anyProvinceForDate(userDate,"江西")[0];
-	    hubei=Interface.anyProvinceForDate(userDate,"湖北")[0];
-	    guangxi=Interface.anyProvinceForDate(userDate,"广西")[0];
-	    gansu=Interface.anyProvinceForDate(userDate,"甘肃")[0];
-	    shanxi=Interface.anyProvinceForDate(userDate,"山西")[0];
-	    neimenggu=Interface.anyProvinceForDate(userDate,"内蒙古")[0];
-	    shanxi2=Interface.anyProvinceForDate(userDate,"陕西")[0];
-	    jilin=Interface.anyProvinceForDate(userDate,"吉林")[0];
-	    fujian=Interface.anyProvinceForDate(userDate,"福建")[0];
-	    guizhou=Interface.anyProvinceForDate(userDate,"贵州")[0];
-	    guangdong=Interface.anyProvinceForDate(userDate,"广东")[0];
-	    qinghai=Interface.anyProvinceForDate(userDate,"青海")[0];
-	    xizang=Interface.anyProvinceForDate(userDate,"西藏")[0];
-	    sichuan=Interface.anyProvinceForDate(userDate,"四川")[0];
-	    ningxia=Interface.anyProvinceForDate(userDate,"宁夏")[0];
-	    hainan=Interface.anyProvinceForDate(userDate,"海南")[0];
-		
-		
+	    userDate = temp;
 	}
 	
 	
@@ -270,9 +287,7 @@
 
 <h1>当前日期：<%=userDate %></h1>
 
-<div id="container" style="height: 800px;width:1200px;background:white;margin:20px 0 0;"></div>
-
-
+<div id="container" style="height: 800px;width:1200px;background:white;"></div>
 
 
 <script type="text/javascript">
@@ -401,8 +416,6 @@
         window.location.href="statistics.jsp?id="+params.data.id;	
         
     });
-    
-    
     
 </script>
 </body>

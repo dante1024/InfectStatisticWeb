@@ -73,15 +73,11 @@ public class Entry {
 	    		String str;
 	    		
 	    		while ((str = bf.readLine()) != null && str.indexOf("//") != 0) {
-	    			
 	    			if(str.length() == 0)
 	    				continue;
-//	    			System.out.println(str);
 	    			String[] information = str.split("\\s+");
-	    			//System.out.println(information[0]);
 	    			String provinceName = information[0];//先取到省份
 	    			int number = getNumber(information);//取出各行人数
-	    			//System.out.println(number);
 	    			
 	    			if(map.get(provinceName) != null) {
 	    				Province province = map.get(provinceName);
@@ -95,8 +91,6 @@ public class Entry {
 	    					date = new Date();
 	    					date.setDate(fileDate);
 	    				}
-	    				
-	    				
 	    				
 	    				switch (information[1]) {
 						case "新增":
@@ -158,7 +152,6 @@ public class Entry {
 	    	catch (IOException  e) {
 	    		e.printStackTrace();
 			}
-//			System.out.println(fileDate);
 		}
 	}
 	

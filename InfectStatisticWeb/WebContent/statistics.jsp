@@ -6,6 +6,8 @@
 <%@page import="backend.Interface" %>
 <%@page import="java.util.ArrayList" %>
 <%@page import="java.util.List" %>
+<%@page import="java.util.Date" %>
+<%@page import="java.text.SimpleDateFormat" %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -177,11 +179,17 @@
 
 		total2 = ip2String + cure2String + dead2String;
 
+		Date today=new Date();
+	    SimpleDateFormat simpleDateFormat=new SimpleDateFormat("yyyy-MM-dd");
+	    userDate = simpleDateFormat.format(today);
 		
 	}
 	else{
-		
-		//userDate="**"+userDate+"**";
+		String temp = userDate;
+		if (userDate.compareTo("2020-01-19") >= 0){
+			if (userDate.compareTo("2020-02-02") > 0){
+				userDate = "2020-02-02";
+			}
 		
 		String[] dateList = {
 				"2020-01-19", "2020-01-20", "2020-01-21", "2020-01-22", "2020-01-23", "2020-01-24", 
@@ -224,7 +232,15 @@
 		}
 
 		total2 = Interface.anyProvinceForDate(userDate,province)[0] + Interface.anyProvinceForDate(userDate,province)[2] + Interface.anyProvinceForDate(userDate,province)[3];
-
+		}
+		else {
+			ip3String = "+0";
+			cure3String = "+0";
+			dead3String = "+0";
+		}
+		
+		userDate = temp;
+		
 		
 	}
 	
@@ -259,7 +275,8 @@
 
 <h1>当前日期：<%=userDate %></h1>
 
-<div id="container" style="height: 600px;width:900px;background:white;margin:20px 0 0;"></div>
+
+<div id="container" style="height: 600px;width:900px;background:white;"></div>
 
 <script type="text/javascript">
 
