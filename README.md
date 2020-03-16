@@ -7,13 +7,13 @@
 
 
 
-![1](C:\Users\lenovo\Desktop\1.jpg)
+![1](https://images.cnblogs.com/cnblogs_com/dante206/1671881/o_2003161353011.jpg)
 
 
 
 项目建好后如图所示：
 
-![2](C:\Users\lenovo\Desktop\2.png)
+![2](https://images.cnblogs.com/cnblogs_com/dante206/1671881/o_2003161356072.png)
 
 
 
@@ -25,23 +25,23 @@
 
 将backend目录放到Java Resources下src下，如图所示：
 
-![3](C:\Users\lenovo\Desktop\3.png)
+![3](https://images.cnblogs.com/cnblogs_com/dante206/1671881/o_2003161357233.png)
 
 
 
 将css目录、js目录、index.jsp、statistics.jsp放到WebContent目录下，如图所示：
 
-![4](C:\Users\lenovo\Desktop\4.png)
+![4](https://images.cnblogs.com/cnblogs_com/dante206/1671881/o_2003161358144.png)
 
 
 
 然后需要进入到Entry.java、Interface.java、index.jsp、statistics.jsp这四个文件中，将变量path改为自己电脑目录下日志目录的绝对路径，因为不同电脑日志目录所放的位置不同，所以一定要根据自己电脑下的路径修改path这个字符串（例如“C:\\\Users\\\lenovo\\\Desktop\\\部分疫情日志log”），如果这四个文件里的path路径没有写对，将因为无法访问到日志目录而无法运行程序
 
-![6](C:\Users\lenovo\Desktop\6.png)
+![6](https://images.cnblogs.com/cnblogs_com/dante206/1671881/o_2003161406246.png)
 
 
 
-![5](C:\Users\lenovo\Desktop\5.png)
+![5](https://images.cnblogs.com/cnblogs_com/dante206/1671881/o_2003161358595.png)
 
 
 
@@ -49,7 +49,7 @@
 
 修改好所有的path后，点击eclipse编译器上的运行按钮，运行index.jsp这个文件，将会在编译器自带的浏览器中打开。因为eclipse自带的编译器功能不够强大，所以需要用另外的浏览器，比如谷歌浏览器火狐浏览器，输入运行index.jsp的路径（例如：http://localhost:8080/InfectStatisticWeb/index.jsp）即可在浏览器上展示作业
 
-![7](C:\Users\lenovo\Desktop\7.png)
+![7](https://images.cnblogs.com/cnblogs_com/dante206/1671881/o_2003161415337.png)
 
 
 
